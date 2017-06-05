@@ -26,4 +26,19 @@ router.post('/signup', passport.authenticate('local.signup',{
   failureFlash: true
 }));
 
+router.get('/signin', function(req, res, next){
+  var messages = req.flash('error');
+  res.render('signin', {
+    csrfToken: req.csrfToken(),
+    title: 'Reddit',
+    messages: messages,
+    hasErrors: messages.length > 0 });
+});
+
+router.post('/signin', passport.authenticate('local.signin', {
+  successRedirect: '/',
+  failureRedirect: '/users/signin',
+  failureFlash: true
+}))
+
 module.exports = router;
