@@ -13,7 +13,11 @@ router.get('/', function(req, res, next) {
 
 router.get('/signup', function(req, res, next){
   var messages = req.flash('error');
-   res.render('signup', {csrfToken: req.csrfToken(), messages: messages, hasErrors: messsages.length > 0});
+  res.render('signup', {
+  	csrfToken: req.csrfToken(),
+  	title: 'Cupcakelicious',
+  	messages: messages,
+  	hasErrors: messages.length > 0 });
 });
 
 router.post('/signup', passport.authenticate('local.signup',{
